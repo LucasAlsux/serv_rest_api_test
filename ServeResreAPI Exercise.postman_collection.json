@@ -1,0 +1,362 @@
+{
+	"info": {
+		"_postman_id": "0faa8563-ecf3-4c8e-b21e-a8d22bc392b1",
+		"name": "ServeResreAPI Exercise",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44226744",
+		"_collection_link": "https://lucasalsux.postman.co/workspace/ServeRestAPI-Exercise~9208beb4-367d-433e-a66b-40f7171cb36a/collection/44226744-0faa8563-ecf3-4c8e-b21e-a8d22bc392b1?action=share&source=collection_link&creator=44226744"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code é 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"lucas@qa.com.br\",\r\n  \"password\": \"teste\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{serveLocal}}/login",
+							"host": [
+								"{{serveLocal}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Usuários",
+			"item": [
+				{
+					"name": "Cadastro",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code é 201\", function ()  \r",
+									"    {\r",
+									"        pm.response.to.have.status(201); \r",
+									"    });\r",
+									"// se usuario foi criado com sucssso"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n{\r\n  \"nome\": \"Iraci\",\r\n  \"email\": \"iraci@qa.com.br\",\r\n  \"password\": \"teste\",\r\n  \"administrador\": \"true\"\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{serveLocal}}/usuarios",
+							"host": [
+								"{{serveLocal}}"
+							],
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar usuários",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code é 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"// Testa se a requisição retornou o valor pedido"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{serveLocal}}/usuarios",
+							"host": [
+								"{{serveLocal}}"
+							],
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar usuário por ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"ID está presente\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"UVO0ZLYjWMhG2oMA\");\r",
+									"});\r",
+									"// Garante que o ID do usuário está correspondnte"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{serveLocal}}/usuarios/UVO0ZLYjWMhG2oMA",
+							"host": [
+								"{{serveLocal}}"
+							],
+							"path": [
+								"usuarios",
+								"UVO0ZLYjWMhG2oMA"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar usuários",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code é 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"// Espera resposta positiva do HTTP"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"jon\",\r\n  \"email\": \"jon@qa.com.br\",\r\n  \"password\": \"teste1\",\r\n  \"administrador\": \"true\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{serveLocal}}/usuarios/19xOXY6cXzROXSgN",
+							"host": [
+								"{{serveLocal}}"
+							],
+							"path": [
+								"usuarios",
+								"19xOXY6cXzROXSgN"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar usuário não existente, com email existente (negativo)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code é 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"// Espera resposta negativa, como descrito na documntação da API"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Ira\",\r\n  \"email\": \"jon@qa.com.br\",\r\n  \"password\": \"teste2\",\r\n  \"administrador\": \"true\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{serveLocal}}/usuarios/ZAuEBLclzB8Z9TC6",
+							"host": [
+								"{{serveLocal}}"
+							],
+							"path": [
+								"usuarios",
+								"ZAuEBLclzB8Z9TC6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar usuário",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code é 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"// Espera resposta positiva HTTP\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{serveLocal}}/usuarios/WlIwVDM3hMfdE0oR",
+							"host": [
+								"{{serveLocal}}"
+							],
+							"path": [
+								"usuarios",
+								"WlIwVDM3hMfdE0oR"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar usuário com carrinho (negativo)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code é 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"// Erro esperado, conforme a documntação"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{serveLocal}}/usuarios/0uxuPY0cbmQhpEz1",
+							"host": [
+								"{{serveLocal}}"
+							],
+							"path": [
+								"usuarios",
+								"0uxuPY0cbmQhpEz1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
