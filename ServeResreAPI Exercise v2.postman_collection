@@ -111,6 +111,50 @@
 					"response": []
 				},
 				{
+					"name": "Cadastrando usuário com Email existente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code é 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"// reposta negativa esperada, de acordo com a segunda regra de negócio do método de cadastro"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Cassio\",\r\n  \"email\": \"jon@qa.com.br\",\r\n  \"password\": \"teste\",\r\n  \"administrador\": \"true\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{serveLocal}}/usuarios",
+							"host": [
+								"{{serveLocal}}"
+							],
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Listar usuários",
 					"event": [
 						{
@@ -188,6 +232,42 @@
 					"response": []
 				},
 				{
+					"name": "Buscar usuário inexistente (negativo)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code é 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"// resposta negativa garante que o usuário não foi encontrado, conforme esperado"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{serveLocal}}/usuarios/UVO0ZLYjWMhG2oMA",
+							"host": [
+								"{{serveLocal}}"
+							],
+							"path": [
+								"usuarios",
+								"UVO0ZLYjWMhG2oMA"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Editar usuários",
 					"event": [
 						{
@@ -239,7 +319,7 @@
 									"pm.test(\"Status code é 400\", function () {\r",
 									"    pm.response.to.have.status(400);\r",
 									"});\r",
-									"// Espera resposta negativa, como descrito na documntação da API"
+									"// Espera resposta negativa, como descrito na documentação da API"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -266,6 +346,51 @@
 							"path": [
 								"usuarios",
 								"ZAuEBLclzB8Z9TC6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criando cadastro com método de editar (PUT)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code é 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"// confirma que um novo usuário foi criado"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Junior\",\r\n  \"email\": \"junior@qa.com.br\",\r\n  \"password\": \"teste\",\r\n  \"administrador\": \"true\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{serveLocal}}/usuarios/0uxuPY0cbmQhpEq4",
+							"host": [
+								"{{serveLocal}}"
+							],
+							"path": [
+								"usuarios",
+								"0uxuPY0cbmQhpEq4"
 							]
 						}
 					},
@@ -302,13 +427,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{serveLocal}}/usuarios/WlIwVDM3hMfdE0oR",
+							"raw": "{{serveLocal}}/usuarios/UVO0ZLYjWMhG2oMA",
 							"host": [
 								"{{serveLocal}}"
 							],
 							"path": [
 								"usuarios",
-								"WlIwVDM3hMfdE0oR"
+								"UVO0ZLYjWMhG2oMA"
 							]
 						}
 					},
